@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Задание 2 — HTTP-запросы (telnet/PuTTY)</title>
+    <title>Задание 2 — Горизонтальные скриншоты на всю ширину</title>
     <style>
         * {
             margin: 0;
@@ -21,7 +21,7 @@
         }
 
         .page-card {
-            max-width: 1300px;
+            max-width: 1300px;           /* достаточно широко для горизонтальных фото */
             width: 100%;
             background: rgba(255,255,255,0.85);
             backdrop-filter: blur(8px);
@@ -60,70 +60,71 @@
             backdrop-filter: blur(2px);
         }
 
-        .grid {
+        /* Сетка с горизонтальными карточками (по одной в ряд на всю ширину) */
+        .horizontal-grid {
             display: flex;
-            flex-wrap: wrap;
-            gap: 1.8rem;
-            justify-content: center;
+            flex-direction: column;
+            gap: 2.2rem;
             margin-top: 2rem;
         }
 
+        /* Карточка занимает всю ширину, фото максимально большое */
         .shot-card {
-            flex: 0 1 340px;
-            min-width: 300px;
+            width: 100%;
             background: #ffffff;
             border-radius: 2rem;
-            padding: 1.4rem 1.2rem 1.5rem 1.2rem;
-            box-shadow: 0 6px 16px rgba(0, 35, 60, 0.08);
-            transition: transform 0.2s ease, box-shadow 0.25s;
+            padding: 1.8rem 1.8rem 2rem 1.8rem;
+            box-shadow: 0 12px 24px rgba(0, 35, 60, 0.1);
+            transition: box-shadow 0.2s, transform 0.15s;
             display: flex;
             flex-direction: column;
             border: 1px solid #ffffff;
         }
 
         .shot-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 28px -10px #1e4f6e4d;
-            border-color: #b7d9f0;
+            transform: translateY(-3px);
+            box-shadow: 0 24px 32px -10px #124f6e;
+            border-color: #cde1f0;
         }
 
         .card-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 1rem;
+            gap: 14px;
+            margin-bottom: 1.5rem;
             font-weight: 600;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             color: #0d3e5c;
             background: #e4f0f9;
-            padding: 0.6rem 1rem;
-            border-radius: 2rem;
+            padding: 0.8rem 1.8rem;
+            border-radius: 60px;
             letter-spacing: -0.01em;
         }
 
         .badge {
             background: #1b789b;
             color: white;
-            border-radius: 40px;
-            width: 30px;
-            height: 30px;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.95rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            box-shadow: inset 0 -1px 3px #0a3343;
+            box-shadow: inset 0 -2px 5px #0a3343;
         }
 
+        /* Превью теперь без ограничений, полностью резиновое */
         .preview {
             background: #f2f7fb;
-            border-radius: 1.4rem;
-            padding: 1.2rem;
+            border-radius: 2rem;
+            padding: 1.2rem;              /* немного внутреннего воздуха */
             display: flex;
             justify-content: center;
             align-items: center;
             border: 2px dashed #90b9d3;
-            min-height: 170px;
+            width: 100%;
             transition: background 0.2s;
         }
 
@@ -131,37 +132,43 @@
             background: #e1edf7;
         }
 
+        /* ГОРИЗОНТАЛЬНЫЕ ФОТОГРАФИИ ВО ВСЮ ШИРИНУ */
         img {
-            max-width: 100%;
-            max-height: 200px;
-            border-radius: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            width: 100%;                   /* растягиваем на всю ширину preview */
+            height: auto;                   /* пропорции сохраняются */
+            max-width: 1200px;              /* чтобы на огромных мониторах было комфортно, но можно и убрать */
+            border-radius: 20px;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
             object-fit: contain;
             background: white;
+            display: block;
+            margin: 0 auto;                 /* если картинка меньше max-width — по центру */
         }
 
         .meta-note {
-            margin-top: 0.9rem;
+            margin-top: 1.4rem;
             background: #fefefe;
-            border-radius: 1.2rem;
-            padding: 0.8rem 1rem;
-            font-size: 0.9rem;
+            border-radius: 1.5rem;
+            padding: 1.2rem 1.8rem;
+            font-size: 1.05rem;
             color: #1c4d68;
-            border-left: 4px solid #47b5d6;
-            box-shadow: 0 1px 5px #c5d9e9;
+            border-left: 6px solid #47b5d6;
+            box-shadow: 0 4px 12px #c5d9e9;
             word-break: break-word;
+            line-height: 1.5;
         }
 
         .meta-note code {
             background: #e2edf5;
-            padding: 0.2rem 0.5rem;
-            border-radius: 30px;
-            font-size: 0.85rem;
+            padding: 0.3rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
             color: #022d40;
+            font-weight: 500;
         }
 
         .footer-links {
-            margin-top: 2.8rem;
+            margin-top: 3rem;
             display: flex;
             justify-content: center;
             gap: 3rem;
@@ -173,15 +180,16 @@
         .git-repo {
             background: #0e2b3d;
             color: white;
-            padding: 0.8rem 2.2rem;
+            padding: 0.9rem 2.5rem;
             border-radius: 60px;
             font-weight: 500;
             text-decoration: none;
             transition: 0.15s;
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.7rem;
             border: 1px solid #4c98b9;
+            font-size: 1.1rem;
         }
 
         .git-repo:hover {
@@ -189,23 +197,27 @@
             transform: scale(1.02);
         }
 
-        @media (max-width: 680px) {
+        @media (max-width: 700px) {
             .page-card { padding: 1.2rem; }
             h1 { font-size: 1.8rem; }
+            .card-header { font-size: 1.2rem; }
+            .badge { width: 36px; height: 36px; font-size: 1rem; }
         }
     </style>
 </head>
 <body>
     <div class="page-card">
         <h1>🌐 Задание 2 · отладка HTTP (telnet / PuTTY)</h1>
-        <div class="subtitle">▸ 7 скриншотов с запросами и заголовками ответа ◂</div>
+        <div class="subtitle">▸ 7 горизонтальных скриншотов — каждый на 100% ширины ◂</div>
 
-        <div class="grid">
+        <!-- Все карточки идут вертикально (одна под другой), но фото внутри занимают всю ширину и горизонтально ориентированы -->
+        <div class="horizontal-grid">
+
             <!-- 1. GET главная HTTP/1.0 -->
             <div class="shot-card">
                 <div class="card-header"><span class="badge">1</span> HTTP/1.0 GET /</div>
                 <div class="preview">
-                    <img src="image1.png" alt="HTTP 1.0 GET request">
+                    <img src="image1.png" alt="HTTP 1.0 GET request" loading="lazy">
                 </div>
                 <div class="meta-note">
                     <code>GET / HTTP/1.0<br>Host: учебный.домен</code> — ответ с заголовками connection close, дата, сервер.
@@ -216,7 +228,7 @@
             <div class="shot-card">
                 <div class="card-header"><span class="badge">2</span> HTTP/1.1 GET /inner/</div>
                 <div class="preview">
-                    <img src="image2.png" alt="HTTP 1.1 internal page">
+                    <img src="image2.png" alt="HTTP 1.1 internal page" loading="lazy">
                 </div>
                 <div class="meta-note">
                     <code>GET /internal/page.html HTTP/1.1<br>Host: учебный.домен</code> постоянное соединение (keep-alive).
@@ -227,7 +239,7 @@
             <div class="shot-card">
                 <div class="card-header"><span class="badge">3</span> HEAD file.tar.gz</div>
                 <div class="preview">
-                    <img src="image3.png" alt="HEAD request content-length">
+                    <img src="image3.png" alt="HEAD request content-length" loading="lazy">
                 </div>
                 <div class="meta-note">
                     <code>HEAD /files/file.tar.gz HTTP/1.1<br>Host: ...</code> → ищем <strong>Content-Length:</strong> 10485760 (пример).
@@ -238,7 +250,7 @@
             <div class="shot-card">
                 <div class="card-header"><span class="badge">4</span> тип /image.png</div>
                 <div class="preview">
-                    <img src="image4.png" alt="Content-Type image/png">
+                    <img src="image4.png" alt="Content-Type image/png" loading="lazy">
                 </div>
                 <div class="meta-note">
                     <code>GET /image.png HTTP/1.1<br>Host: ...</code> → <strong>Content-Type: image/png</strong> в заголовках.
@@ -249,7 +261,7 @@
             <div class="shot-card">
                 <div class="card-header"><span class="badge">5</span> POST /index.php</div>
                 <div class="preview">
-                    <img src="image5.png" alt="POST comment">
+                    <img src="image5.png" alt="POST comment" loading="lazy">
                 </div>
                 <div class="meta-note">
                     <code>POST /index.php HTTP/1.1<br>Host: ...<br>Content-Type: application/x-www-form-urlencoded<br>Content-Length: 15<br><br>comment=привет</code>
@@ -260,7 +272,7 @@
             <div class="shot-card">
                 <div class="card-header"><span class="badge">6</span> Range: bytes=0-99</div>
                 <div class="preview">
-                    <img src="image6.png" alt="Range first 100 bytes">
+                    <img src="image6.png" alt="Range first 100 bytes" loading="lazy">
                 </div>
                 <div class="meta-note">
                     <code>GET /files/file.tar.gz HTTP/1.1<br>Host: ...<br>Range: bytes=0-99</code> → ответ <strong>206 Partial Content</strong>.
@@ -271,7 +283,7 @@
             <div class="shot-card">
                 <div class="card-header"><span class="badge">7</span> кодировка /index.php</div>
                 <div class="preview">
-                    <img src="image7.png" alt="Charset header">
+                    <img src="image7.png" alt="Charset header" loading="lazy">
                 </div>
                 <div class="meta-note">
                     <code>HEAD /index.php HTTP/1.1</code> или GET. Заголовок <strong>Content-Type: text/html; charset=utf-8</strong> (или windows‑1251).
@@ -279,14 +291,15 @@
             </div>
         </div>
 
-        
-       
+        <!-- легенда / ссылка (ничего не меняет) -->
+        <div class="footer-links">
+            <a href="#" class="git-repo" onclick="return false;">📁 files/ · горизонтальные фото на всю ширину</a>
+        </div>
+    </div>
 
-    <!-- Небольшой скрипт для подсветки placeholder имён (ничего не меняет) -->
     <script>
         (function() {
-            // это просто декоративная пометка — в консоль выведем дружественное напоминание
-            console.log('Задание 2: скриншоты должны быть залиты в каталог files вместе с index.html (текущая страница) через GIT.');
+            console.log('✅ Каждая фотография занимает всю ширину карточки (горизонтально)');
         })();
     </script>
 </body>
