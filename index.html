@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание 2 — HTTP-запросы (telnet/PuTTY)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: #eef2f5;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-card {
+            max-width: 1300px;
+            width: 100%;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 2.5rem;
+            padding: 2rem 2.2rem;
+            box-shadow: 0 25px 45px -18px #1a3b4e;
+            border: 1px solid rgba(255,255,255,0.7);
+        }
+
+        h1 {
+            font-size: 2.3rem;
+            font-weight: 600;
+            background: linear-gradient(145deg, #0b344f, #1f5e8a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            border-left: 7px solid #1f7faa;
+            padding-left: 1.4rem;
+        }
+
+        .subtitle {
+            color: #2d4b65;
+            margin-left: 2rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            font-size: 1.1rem;
+            background: #d9e6f2a0;
+            display: inline-block;
+            padding: 0.4rem 2rem;
+            border-radius: 40px;
+            backdrop-filter: blur(2px);
+        }
+
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .shot-card {
+            flex: 0 1 340px;
+            min-width: 300px;
+            background: #ffffff;
+            border-radius: 2rem;
+            padding: 1.4rem 1.2rem 1.5rem 1.2rem;
+            box-shadow: 0 6px 16px rgba(0, 35, 60, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.25s;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #ffffff;
+        }
+
+        .shot-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 28px -10px #1e4f6e4d;
+            border-color: #b7d9f0;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #0d3e5c;
+            background: #e4f0f9;
+            padding: 0.6rem 1rem;
+            border-radius: 2rem;
+            letter-spacing: -0.01em;
+        }
+
+        .badge {
+            background: #1b789b;
+            color: white;
+            border-radius: 40px;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            font-weight: 600;
+            box-shadow: inset 0 -1px 3px #0a3343;
+        }
+
+        .preview {
+            background: #f2f7fb;
+            border-radius: 1.4rem;
+            padding: 1.2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px dashed #90b9d3;
+            min-height: 170px;
+            transition: background 0.2s;
+        }
+
+        .preview:hover {
+            background: #e1edf7;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            object-fit: contain;
+            background: white;
+        }
+
+        .meta-note {
+            margin-top: 0.9rem;
+            background: #fefefe;
+            border-radius: 1.2rem;
+            padding: 0.8rem 1rem;
+            font-size: 0.9rem;
+            color: #1c4d68;
+            border-left: 4px solid #47b5d6;
+            box-shadow: 0 1px 5px #c5d9e9;
+            word-break: break-word;
+        }
+
+        .meta-note code {
+            background: #e2edf5;
+            padding: 0.2rem 0.5rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #022d40;
+        }
+
+        .footer-links {
+            margin-top: 2.8rem;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            border-top: 1px solid #b7cfdf;
+            padding-top: 2rem;
+        }
+
+        .git-repo {
+            background: #0e2b3d;
+            color: white;
+            padding: 0.8rem 2.2rem;
+            border-radius: 60px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            border: 1px solid #4c98b9;
+        }
+
+        .git-repo:hover {
+            background: #1e4a64;
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 680px) {
+            .page-card { padding: 1.2rem; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-card">
+        <h1>🌐 Задание 2 · отладка HTTP (telnet / PuTTY)</h1>
+        <div class="subtitle">▸ 7 скриншотов с запросами и заголовками ответа ◂</div>
+
+        <div class="grid">
+            <!-- 1. GET главная HTTP/1.0 -->
+            <div class="shot-card">
+                <div class="card-header"><span class="badge">1</span> HTTP/1.0 GET /</div>
+                <div class="preview">
+                    <img src="task2_1_http10_get.png" alt="HTTP 1.0 GET request">
+                </div>
+                <div class="meta-note">
+                    <code>GET / HTTP/1.0<br>Host: учебный.домен</code> — ответ с заголовками connection close, дата, сервер.
+                </div>
+            </div>
+
+            <!-- 2. внутренняя страница HTTP/1.1 -->
+            <div class="shot-card">
+                <div class="card-header"><span class="badge">2</span> HTTP/1.1 GET /inner/</div>
+                <div class="preview">
+                    <img src="task2_2_http11_inner.png" alt="HTTP 1.1 internal page">
+                </div>
+                <div class="meta-note">
+                    <code>GET /internal/page.html HTTP/1.1<br>Host: учебный.домен</code> постоянное соединение (keep-alive).
+                </div>
+            </div>
+
+            <!-- 3. Размер file.tar.gz (HEAD / Content-Length) -->
+            <div class="shot-card">
+                <div class="card-header"><span class="badge">3</span> HEAD file.tar.gz</div>
+                <div class="preview">
+                    <img src="task2_3_head_filesize.png" alt="HEAD request content-length">
+                </div>
+                <div class="meta-note">
+                    <code>HEAD /files/file.tar.gz HTTP/1.1<br>Host: ...</code> → ищем <strong>Content-Length:</strong> 10485760 (пример).
+                </div>
+            </div>
+
+            <!-- 4. Медиатип /image.png -->
+            <div class="shot-card">
+                <div class="card-header"><span class="badge">4</span> тип /image.png</div>
+                <div class="preview">
+                    <img src="task2_4_image_contenttype.png" alt="Content-Type image/png">
+                </div>
+                <div class="meta-note">
+                    <code>GET /image.png HTTP/1.1<br>Host: ...</code> → <strong>Content-Type: image/png</strong> в заголовках.
+                </div>
+            </div>
+
+            <!-- 5. POST комментарий /index.php -->
+            <div class="shot-card">
+                <div class="card-header"><span class="badge">5</span> POST /index.php</div>
+                <div class="preview">
+                    <img src="task2_5_post_comment.png" alt="POST comment">
+                </div>
+                <div class="meta-note">
+                    <code>POST /index.php HTTP/1.1<br>Host: ...<br>Content-Type: application/x-www-form-urlencoded<br>Content-Length: 15<br><br>comment=привет</code>
+                </div>
+            </div>
+
+            <!-- 6. Первые 100 байт file.tar.gz (Range) -->
+            <div class="shot-card">
+                <div class="card-header"><span class="badge">6</span> Range: bytes=0-99</div>
+                <div class="preview">
+                    <img src="task2_6_range100.png" alt="Range first 100 bytes">
+                </div>
+                <div class="meta-note">
+                    <code>GET /files/file.tar.gz HTTP/1.1<br>Host: ...<br>Range: bytes=0-99</code> → ответ <strong>206 Partial Content</strong>.
+                </div>
+            </div>
+
+            <!-- 7. Кодировка /index.php -->
+            <div class="shot-card">
+                <div class="card-header"><span class="badge">7</span> кодировка /index.php</div>
+                <div class="preview">
+                    <img src="task2_7_charset.png" alt="Charset header">
+                </div>
+                <div class="meta-note">
+                    <code>HEAD /index.php HTTP/1.1</code> или GET. Заголовок <strong>Content-Type: text/html; charset=utf-8</strong> (или windows‑1251).
+                </div>
+            </div>
+        </div>
+
+        
+       
+
+    <!-- Небольшой скрипт для подсветки placeholder имён (ничего не меняет) -->
+    <script>
+        (function() {
+            // это просто декоративная пометка — в консоль выведем дружественное напоминание
+            console.log('Задание 2: скриншоты должны быть залиты в каталог files вместе с index.html (текущая страница) через GIT.');
+        })();
+    </script>
+</body>
+</html>
