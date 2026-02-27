@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Задание 2 — Горизонтальные скриншоты на всю ширину</title>
+    <title>Задание 2 </title>
     <style>
         * {
             margin: 0;
@@ -242,7 +242,7 @@
                     <img src="image3.png" alt="HEAD request content-length" loading="lazy">
                 </div>
                 <div class="meta-note">
-                    <code>HEAD /files/file.tar.gz HTTP/1.1<br>Host: ...</code> → ищем <strong>Content-Length:</strong> 10485760 (пример).
+                    <code>HEAD /files/file.tar.gz HTTP/1.1<br>Host: ...</code> → ищем <strong>Content-Length:</strong> 11335.
                 </div>
             </div>
 
@@ -262,33 +262,21 @@
                 <div class="card-header"><span class="badge">5</span> POST /index.php</div>
                 <div class="preview">
                     <img src="image5.png" alt="POST comment" loading="lazy">
-                </div>
-                <div class="meta-note">
-                    <code>POST /index.php HTTP/1.1<br>Host: ...<br>Content-Type: application/x-www-form-urlencoded<br>Content-Length: 15<br><br>comment=привет</code>
-                </div>
-            </div>
+               
 
             <!-- 6. Первые 100 байт file.tar.gz (Range) -->
             <div class="shot-card">
                 <div class="card-header"><span class="badge">6</span> Range: bytes=0-99</div>
                 <div class="preview">
                     <img src="image6.png" alt="Range first 100 bytes" loading="lazy">
-                </div>
-                <div class="meta-note">
-                    <code>GET /files/file.tar.gz HTTP/1.1<br>Host: ...<br>Range: bytes=0-99</code> → ответ <strong>206 Partial Content</strong>.
-                </div>
-            </div>
+                
 
             <!-- 7. Кодировка /index.php -->
             <div class="shot-card">
                 <div class="card-header"><span class="badge">7</span> кодировка /index.php</div>
                 <div class="preview">
                     <img src="image7.png" alt="Charset header" loading="lazy">
-                </div>
-                <div class="meta-note">
-                    <code>HEAD /index.php HTTP/1.1</code> или GET. Заголовок <strong>Content-Type: text/html; charset=utf-8</strong> (или windows‑1251).
-                </div>
-            </div>
+               
         </div>
 
         <!-- легенда / ссылка (ничего не меняет) -->
